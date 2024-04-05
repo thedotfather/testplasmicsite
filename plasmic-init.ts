@@ -1,5 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
-import TemporaryDrawer from "./components/TemporaryDrawer"; // Adjust this path as needed
+import TemporaryDrawer from "./components/TemporaryDrawer"; // Ensure this path is accurate
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -11,19 +11,12 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
-// Register TemporaryDrawer component with new props
 PLASMIC.registerComponent(TemporaryDrawer, {
   name: "TemporaryDrawer",
   props: {
     title: "string",
-    items: {
-      type: "string",
-      defaultValue: JSON.stringify([
-        { text: "Inbox", imgSrc: "path/to/your/default/image.svg" },
-        { text: "Starred", imgSrc: "path/to/another/image.svg" }
-      ]),
-      description: "JSON string representing list of items. Each item should have 'text' and 'imgSrc'.",
-    },
     initialOpen: "boolean",
   },
+  // Note: The component is designed to accept children directly in its implementation,
+  // which should be utilized within Plasmic Studio as needed.
 });
