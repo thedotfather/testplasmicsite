@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
+import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -9,73 +9,48 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-// Importing icons
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-// Add other necessary icon imports here
 
-// Define a type for the items in the drawer
-type DrawerItem = {
+// Define props types for Drawer Items
+type DrawerItemProps = {
   text: string;
-  iconName: 'inbox' | 'mail'; // Extend this union type as you add more icons
   link: string;
+  iconName: string; // Assume iconName can be used to dynamically load the correct icon
 };
 
-// Helper function to dynamically select the icon
-const getIcon = (iconName: DrawerItem['iconName']): React.ReactNode => {
-  switch (iconName) {
-    case 'inbox':
-      return <InboxIcon />;
-    case 'mail':
-      return <MailIcon />;
-    // Add more cases for other icons as needed
-    default:
-      return null; // Return null or a default icon as a fallback
-  }
+type TemporaryDrawerProps = {
+  title: string; // Title for the drawer
+  items: DrawerItemProps[]; // Array of items for dynamic rendering
+  initialOpen?: boolean;
 };
 
-const TemporaryDrawer: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const navigate = useNavigate(); // Hook for navigation
+const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({ title, items, initialOpen = false }) => {
+  const [open, setOpen] = useState(initialOpen);
 
-  const items: DrawerItem[] = [ // Example items array, adjust according to your needs
-    { text: 'Inbox', iconName: 'inbox', link: '/inbox' },
-    { text: 'Send email', iconName: 'mail', link: '/send-email' },
-    // Add more item objects as needed
-  ];
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+  // Placeholder for dynamic icon loading function
+  const getIcon = (iconName: string): JSX.Element => {
+    // Logic to dynamically load an icon based on iconName
+    // This could be a mapping of names to imported icons, or dynamic imports
+    // For placeholder purposes, return a generic icon or null
+    return null; // Placeholder implementation
   };
-
-  const handleNavigation = (link: string) => {
-    navigate(link); // Use the navigate function to change routes
-  };
-
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {items.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton onClick={() => handleNavigation(item.link)}>
-              <ListItemIcon>
-                {getIcon(item.iconName)}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      {/* If you have other groups of items, repeat the mapping process here as needed */}
-    </Box>
-  );
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
+      <Button onClick={() => setOpen(true)}>{title}</Button>
+      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+        <Box role="presentation" sx={{ width: 250 }}>
+          <List>
+            {items.map((item, index) => (
+              <ListItem key={index} disablePadding>
+                <ListItemButton component={Link} to={item.link}>
+                  <ListItemIcon>{getIcon(item.iconName)}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Box>
       </Drawer>
     </div>
   );

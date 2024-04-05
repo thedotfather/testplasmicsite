@@ -32,4 +32,32 @@ PLASMIC.registerComponent(TemporaryDrawer, {
   }
 });
 
+PLASMIC.registerComponent(TemporaryDrawer, {
+  name: "TemporaryDrawer",
+  props: {
+    title: "string",
+    initialOpen: "boolean",
+    items: {
+      type: "object",
+      defaultValue: [{
+        text: 'Default Item',
+        link: '/',
+        iconName: 'inbox',
+      }],
+      description: "Items to display in the drawer, each with text, link, and an iconName.",
+      edit: {
+        type: "array",
+        itemProps: {
+          text: { type: "string" },
+          link: { type: "string" },
+          iconName: {
+            type: "choice",
+            options: listAvailableIconNames()
+          }
+        }
+      }
+    },
+  }
+});
+
 export default PLASMIC;
