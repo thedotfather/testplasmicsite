@@ -8,18 +8,28 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
-// Define props type
+interface DrawerItem {
+  text: string;
+  imgSrc: string; // URL of the image
+}
+
 interface TemporaryDrawerProps {
   title: string;
-  items: string[];
+  items: string; // JSON string of items
   initialOpen?: boolean;
 }
 
 const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({ title, items, initialOpen = false }) => {
-  const [open, setOpen] = React.useState(initialOpen);
+  const [open, setOpen] = React.useState<boolean>(initialOpen);
+
+  // Parse the items JSON string
+  let parsedItems: DrawerItem[] = [];
+  try {
+    parsedItems = JSON.parse(items);
+  } catch (error) {
+    console.error("Error parsing items JSON", error);
+  }
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -28,17 +38,19 @@ const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({ title, items, initial
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        {items.map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {parsedItems.map((item, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {/* Render the image for each item */}
+                <img src={item.imgSrc} alt={item.text} style={{ width: 24, height: 24 }} />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
+      <Divider />
     </Box>
   );
 
@@ -50,6 +62,6 @@ const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({ title, items, initial
       </Drawer>
     </div>
   );
-}
+};
 
 export default TemporaryDrawer;
