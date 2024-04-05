@@ -11,11 +11,11 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
+// Register TemporaryDrawer component with new props
 PLASMIC.registerComponent(TemporaryDrawer, {
   name: "TemporaryDrawer",
   props: {
     title: "string",
-    // Change items to a string that should contain JSON data
     items: {
       type: "string",
       defaultValue: JSON.stringify([
