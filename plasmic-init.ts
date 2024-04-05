@@ -11,18 +11,25 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
+// Registering the TemporaryDrawer component with Plasmic
 PLASMIC.registerComponent(TemporaryDrawer, {
   name: "TemporaryDrawer",
   props: {
-    title: {
-      type: "string",
-      defaultValue: "My Drawer", // You can set a default title here if you want
+    // Assuming `items` is an array of objects each with `text`, `iconName`, and `link`
+    items: {
+      type: "object", // Specify as "array" or "object" based on how you implement the prop handling in Plasmic
+      defaultValue: [
+        { text: 'Inbox', iconName: 'inbox', link: '/inbox' },
+        { text: 'Send email', iconName: 'mail', link: '/send-email' }
+      ],
+      description: "List of items in the drawer",
     },
     initialOpen: {
       type: "boolean",
-      defaultValue: false, // Set the default state of the drawer
+      defaultValue: false,
+      description: "Whether the drawer is open initially",
     },
-  },
-  // This comment is just to reiterate that if TemporaryDrawer correctly renders its children,
-  // Plasmic Studio will allow users to place other components within it.
+  }
 });
+
+export default PLASMIC;

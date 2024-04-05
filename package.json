@@ -16,14 +16,16 @@
     "@plasmicapp/loader-nextjs": "^1.0.368",
     "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@types/node": "20.12.4",
-    "@types/react": "18.2.74",
-    "@types/react-dom": "^18",
+    "@types/node": "^20.12.4",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "@types/react-router-dom": "^5.3.3",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
-    "typescript": "5.4.4"
+    "typescript": "^5.4.4"
   }
 }
