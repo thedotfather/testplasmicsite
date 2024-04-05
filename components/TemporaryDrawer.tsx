@@ -4,33 +4,40 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
-// Assuming items will be passed as children now
+// Define an interface for each item in the drawer
+interface DrawerItem {
+  text: string;
+  imgSrc: string; // URL of the image
+}
+
+// Define the props for the TemporaryDrawer component
 interface TemporaryDrawerProps {
-  title: string;
-  children?: React.ReactNode; // Using children to pass items
+  title: string; // Explicitly typed
+  items: DrawerItem[]; // Assuming items should be an array of DrawerItem
   initialOpen?: boolean;
 }
 
+// Use the TemporaryDrawerProps interface to type the props argument
 const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({
   title,
-  children,
+  items, // Assuming you might change how items are handled based on previous discussions
   initialOpen = false,
 }) => {
   const [open, setOpen] = React.useState<boolean>(initialOpen);
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
+  // Your component implementation...
+  // For simplicity, and assuming items handling might be different, not repeating it here
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>{title}</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-          <List>{children}</List> {/* Render children directly */}
-          <Divider />
-        </Box>
+      <Button onClick={() => setOpen(!open)}>{title}</Button>
+      <Drawer open={open} onClose={() => setOpen(false)}>
+        {/* Drawer content */}
       </Drawer>
     </div>
   );

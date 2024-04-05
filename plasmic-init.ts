@@ -1,5 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
-import TemporaryDrawer from "./components/TemporaryDrawer"; // Ensure this path is accurate
+import TemporaryDrawer from "./components/TemporaryDrawer"; // Make sure this path matches the location of your component file
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -14,9 +14,15 @@ export const PLASMIC = initPlasmicLoader({
 PLASMIC.registerComponent(TemporaryDrawer, {
   name: "TemporaryDrawer",
   props: {
-    title: "string",
-    initialOpen: "boolean",
+    title: {
+      type: "string",
+      defaultValue: "My Drawer", // You can set a default title here if you want
+    },
+    initialOpen: {
+      type: "boolean",
+      defaultValue: false, // Set the default state of the drawer
+    },
   },
-  // Note: The component is designed to accept children directly in its implementation,
-  // which should be utilized within Plasmic Studio as needed.
+  // This comment is just to reiterate that if TemporaryDrawer correctly renders its children,
+  // Plasmic Studio will allow users to place other components within it.
 });
