@@ -1,4 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
+import TemporaryDrawer from "./components/TemporaryDrawer"; // Use "./" if plasmic-init.ts is at the root level
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -7,19 +8,14 @@ export const PLASMIC = initPlasmicLoader({
       token: "4fAvhBxx9oCaQdG6cmh2pfgkTV52FRKkwJnYwYGXQlCfqgl4NXvXzYRoCRmIeh231ctooBoGgeJygK9Ieo1A",
     },
   ],
-
-  // By default Plasmic will use the last published version of your project.
-  // For development, you can set preview to true, which will use the unpublished
-  // project, allowing you to see your designs without publishing.  Please
-  // only use this for development, as this is significantly slower.
   preview: false,
 });
 
-// You can register any code components that you want to use here; see
-// https://docs.plasmic.app/learn/code-components-ref/
-// And configure your Plasmic project to use the host url pointing at
-// the /plasmic-host page of your nextjs app (for example,
-// http://localhost:3000/plasmic-host).  See
-// https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
-
-// PLASMIC.registerComponent(...);
+// Register TemporaryDrawer component
+PLASMIC.registerComponent(TemporaryDrawer, {
+  name: "TemporaryDrawer", // This is the name you'll see in Plasmic Studio
+  props: {
+    open: 'boolean', // Considering 'open' is managed internally, you might not need to expose it. This is just an example.
+  },
+  // Add more props as needed. Since your component uses internal state and provides no props for customization, this is a basic setup.
+});
