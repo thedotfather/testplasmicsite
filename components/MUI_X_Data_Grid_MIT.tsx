@@ -20,8 +20,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     pageSize,
     pagination: true,
     checkboxSelection: true,
-    disableSelectionOnClick: true,
-    pageSizeOptions: [5, 10, 15, 20]
+    disableSelectionOnClick: true
   };
 
   return (
