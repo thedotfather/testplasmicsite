@@ -1,5 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
-import MUI_X_Data_Grid_MIT from "./components/MUI_X_Data_Grid-MIT"; // Make sure this path matches the location of your component file
+import MUI_X_Data_Grid_MIT from "./components/MUI_X_Data_Grid_MIT"; // Make sure this path matches the location of your component file
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -12,7 +12,11 @@ export const PLASMIC = initPlasmicLoader({
 });
 
 PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
-  name: "MUI_X_Data_Grid-MIT",
+  name: "MUI_X_Data_Grid_MIT",
+  props: {
+    // Define props here. For example:
+    pageSize: "number",
+  },
 });
 
 export default PLASMIC;
