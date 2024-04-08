@@ -1,5 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
-import TemporaryDrawer from "./components/MUI_X_Data_Grid-MIT"; // Make sure this path matches the location of your component file
+import MUI_X_Data_Grid_MIT from "./components/MUI_X_Data_Grid-MIT"; // Make sure this path matches the location of your component file
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -11,7 +11,7 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
-PLASMIC.registerComponent(TemporaryDrawer, {
+PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
   name: "MUI_X_Data_Grid-MIT",
 });
 
