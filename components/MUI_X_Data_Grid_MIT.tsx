@@ -17,8 +17,9 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   const dataGridProps: any = {
     rows,
     columns,
+    pageSizeOptions: [25, 50, 100],
     checkboxSelection: true,
-    pageSizeOptions: [5, 10, 15]
+    
   };
 
   return (
