@@ -1,5 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
-import TemporaryDrawer from "./components/TemporaryDrawer"; // Make sure this path matches the location of your component file
+import TemporaryDrawer from "./components/MUI_X_Data_Grid-MIT"; // Make sure this path matches the location of your component file
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -11,53 +11,8 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
-// Registering the TemporaryDrawer component with Plasmic
 PLASMIC.registerComponent(TemporaryDrawer, {
-  name: "TemporaryDrawer",
-  props: {
-    // Assuming `items` is an array of objects each with `text`, `iconName`, and `link`
-    items: {
-      type: "object", // Specify as "array" or "object" based on how you implement the prop handling in Plasmic
-      defaultValue: [
-        { text: 'Inbox', iconName: 'inbox', link: '/inbox' },
-        { text: 'Send email', iconName: 'mail', link: '/send-email' }
-      ],
-      description: "List of items in the drawer",
-    },
-    initialOpen: {
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the drawer is open initially",
-    },
-  }
-});
-
-PLASMIC.registerComponent(TemporaryDrawer, {
-  name: "TemporaryDrawer",
-  props: {
-    title: "string",
-    initialOpen: "boolean",
-    items: {
-      type: "object",
-      defaultValue: [{
-        text: 'Default Item',
-        link: '/',
-        iconName: 'inbox',
-      }],
-      description: "Items to display in the drawer, each with text, link, and an iconName.",
-      edit: {
-        type: "array",
-        itemProps: {
-          text: { type: "string" },
-          link: { type: "string" },
-          iconName: {
-            type: "choice",
-            options: listAvailableIconNames()
-          }
-        }
-      }
-    },
-  }
+  name: "MUI_X_Data_Grid-MIT",
 });
 
 export default PLASMIC;
