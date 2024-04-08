@@ -36,10 +36,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         // Add more example columns as needed
       ],
       description: "Array of column definitions. Example: [{ field: 'id', headerName: 'ID', width: 90 }]",
-    },
-    
-    // 'pageSize' remains a simple scalar prop
-    pageSize: "number",
+    }
   }
 });
 
