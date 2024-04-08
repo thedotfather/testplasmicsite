@@ -36,6 +36,11 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         // Add more example columns as needed
       ],
       description: "Array of column definitions. Example: [{ field: 'id', headerName: 'ID', width: 90 }]",
+    },
+    pageSizeOptions: {
+      type: "object",
+      description: "JSON array of numbers indicating available page sizes, e.g., [25, 50, 100]",
+      defaultValue: [25, 50, 100] // This is illustrative; actual support for default values would depend on Plasmic's handling of default JSON values.
     }
   }
 });
