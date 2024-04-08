@@ -14,27 +14,33 @@ export const PLASMIC = initPlasmicLoader({
 PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
   name: "DataGridDemo",
   props: {
-    // Assuming 'rows' should be treated as a slot for arbitrary content
-    // However, given it's an array of objects, a direct 'slot' type might not be applicable
-    // Instead, we'll register it as 'object', understanding it may need custom handling in Plasmic
-    rows: "object",
+    // Example 'rows' data structure
+    rows: {
+      type: 'object',
+      defaultValue: [
+        { id: 1, lastName: 'Doe', firstName: 'John', age: 30 },
+        { id: 2, lastName: 'Smith', firstName: 'Anna', age: 24 },
+        // Add more example rows as needed
+      ],
+      description: "Array of objects where each object represents a row in the data grid. Example: [{ id: 1, lastName: 'Doe', firstName: 'John', age: 30 }]",
+    },
     
-    // Register 'columns' as an object array; similar reasoning as 'rows'
-    // Note: Direct manipulation of complex structures like 'columns' in Plasmic might be limited
-    columns: "object",
+    // Example 'columns' data structure
+    columns: {
+      type: 'object',
+      defaultValue: [
+        { field: 'id', headerName: 'ID', width: 90 },
+        { field: 'firstName', headerName: 'First name', width: 150, editable: true },
+        { field: 'lastName', headerName: 'Last name', width: 150, editable: true },
+        { field: 'age', headerName: 'Age', type: 'number', width: 110, editable: true },
+        // Add more example columns as needed
+      ],
+      description: "Array of column definitions. Example: [{ field: 'id', headerName: 'ID', width: 90 }]",
+    },
     
-    // 'pageSize' is a simple scalar prop, registered directly
+    // 'pageSize' remains a simple scalar prop
     pageSize: "number",
-    
-    // Additional dynamic or conditional props can be handled similarly
-    // For example, if 'pageSizeOptions' needed dynamic handling based on another prop
-    // pageSizeOptions: {
-    //   type: 'choice',
-    //   options: ['5', '10', '20', '50', '100'],
-    //   hidden: (props) => !props.pageSize, // Hypothetical dynamic behavior
-    // }
   }
 });
-
 
 export default PLASMIC;
