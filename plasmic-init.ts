@@ -41,9 +41,17 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: "object",
       description: "JSON array of numbers indicating available page sizes, e.g., [25, 50, 100]",
       defaultValue: [25, 50, 100]
+    },
+    cellTextColor: {
+      type: 'color',
+      defaultValue: '#333', // Default cell text color
+    },
+    headerBackgroundColor: {
+      type: 'color',
+      defaultValue: '#eee', // Default header background color
     }
   },
-  classNameProp: "className",
+  classNameProp: "className"
 });
 
 export default PLASMIC;

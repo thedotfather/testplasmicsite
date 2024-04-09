@@ -7,16 +7,18 @@ interface DataGridDemoProps {
   columns: GridColDef[];
   pageSizeOptions: Array<number
   | { label: string, value: number }>;
+  cellTextColor?: string; // Custom prop for cell text color
+  headerBackgroundColor?: string; // Custom prop for header background color
   className?: string;
-  style?: React.CSSProperties;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
   columns,
   pageSizeOptions,
-  className,
-  style
+  cellTextColor,
+  headerBackgroundColor,
+  className
 }) => {
   // Using 'any' to bypass TypeScript checks as a last resort
   const dataGridProps: any = {
@@ -27,8 +29,15 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   };
 
   return (
-    <Box sx={{ height: 400, width: '100%' }} className={className} style={style}>
-      <DataGrid {...dataGridProps} />
+    <Box sx={{ height: 400, width: '100%' }} className={className}>
+      <DataGrid {...dataGridProps} sx={{
+          '& .MuiDataGrid-cell': {
+            color: cellTextColor, // Apply the cell text color
+          },
+          '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: headerBackgroundColor, // Apply the header background color
+          },
+        }} />
     </Box>
   );
 };
