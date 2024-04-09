@@ -52,7 +52,12 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     },
     font: {
       type: 'choice',
-      options: ["", "Lucida Console"]
+      options: [
+        {label: "Default", value: ""}, 
+        {label: "Lucida Console", value: "Lucida Console"}, 
+        {label: "Times New Roman", value: "Times New Roman"}, 
+        {label: "Arial", value: "Arial"}
+      ]
     },
     checkboxSelection: {
       type: 'boolean',
