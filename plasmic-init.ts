@@ -50,6 +50,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'color',
       defaultValue: '#333' // Default header background color
     },
+    font: {
+      type: 'choice',
+      options: ["", "Lucida Console"]
+    },
     checkboxSelection: {
       type: 'boolean',
       defaultValue: false

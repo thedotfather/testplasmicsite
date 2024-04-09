@@ -9,6 +9,7 @@ interface DataGridDemoProps {
   | { label: string, value: number }>;
   cellTextColor?: string; // Custom prop for cell text color
   headerTextColor?: string; // Custom prop for header background color
+  font: string;
   className?: string;
   checkboxSelection : boolean;
 }
@@ -19,6 +20,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   pageSizeOptions,
   cellTextColor,
   headerTextColor,
+  font,
   checkboxSelection,
   className
 }) => {
@@ -35,7 +37,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       <DataGrid {...dataGridProps} sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
-            'font-family': ""
+            'font-family': font,
           },
           '& .MuiDataGrid-columnHeaders': {
             color: headerTextColor,
