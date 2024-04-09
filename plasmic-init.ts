@@ -26,7 +26,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     },
     
     // Example 'columns' data structure
-    /* columns: {
+    columns: {
       type: 'object',
       defaultValue: [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -36,10 +36,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         // Add more example columns as needed
       ],
       description: "Array of column definitions. Example: [{ field: 'id', headerName: 'ID', width: 90 }]",
-    }, */
-    columns : {
-      type: 'array'
-    },
+    }, 
     pageSizeOptions: {
       type: "object",
       description: "JSON array of numbers indicating available page sizes, e.g., [25, 50, 100]",

@@ -34,7 +34,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     <Box sx={{ height: 400, width: '100%' }} className={className}>
       <DataGrid {...dataGridProps} sx={{
           '& .MuiDataGrid-cell': {
-            color: cellTextColor, // Apply the cell text color
+            color: cellTextColor,
+            'font-family': "Lucida Console"
           },
           '& .MuiDataGrid-columnHeaders': {
             color: headerTextColor,
