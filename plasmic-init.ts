@@ -43,7 +43,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       defaultValue: [25, 50, 100]
     }
   },
-  classNameProp: "className"
+  classNameProp: "className",
 });
 
 export default PLASMIC;
