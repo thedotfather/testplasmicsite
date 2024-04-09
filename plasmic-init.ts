@@ -40,7 +40,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     pageSizeOptions: {
       type: "object",
       description: "JSON array of numbers indicating available page sizes, e.g., [25, 50, 100]",
-      defaultValue: [25, 50, 100]
+      defaultValue: [25, 50]
     }
   }
 });
