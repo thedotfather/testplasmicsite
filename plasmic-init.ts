@@ -44,11 +44,15 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     },
     cellTextColor: {
       type: 'color',
-      defaultValue: '#333', // Default cell text color
+      defaultValue: '#333' // Default cell text color
     },
     headerTextColor: {
       type: 'color',
-      defaultValue: '#333', // Default header background color
+      defaultValue: '#333' // Default header background color
+    },
+    checkboxSelection: {
+      type: 'boolean',
+      defaultValue: false
     }
   },
   classNameProp: "className"
