@@ -1,20 +1,20 @@
 import * as React from 'react';
+import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
   columns: GridColDef[];
-  pageSizeOptions: Array<number | { label: string, value: number }>;
-  style?: React.CSSProperties; // Allows passing custom styles for sizing
+  pageSizeOptions: Array<number
+  | { label: string, value: number }>;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
   columns,
   pageSizeOptions,
-  style, // Accepts style prop
 }) => {
-  // Setup for DataGrid properties
+  // Using 'any' to bypass TypeScript checks as a last resort
   const dataGridProps: any = {
     rows,
     columns,
@@ -22,11 +22,10 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection: true,
   };
 
-  // Apply custom styles to the container
   return (
-    <div style={style}> {/* Apply the style prop to control size */}
-      <DataGrid {...dataGridProps} style={{ height: '100%', width: '100%' }} />
-    </div>
+    <Box sx={{ height: 400, width: '100%' }}>
+      <DataGrid {...dataGridProps} />
+    </Box>
   );
 };
 
