@@ -14,18 +14,14 @@ export const PLASMIC = initPlasmicLoader({
 PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
   name: "DataGridDemo",
   props: {
-    // Example 'rows' data structure
     rows: {
       type: 'object',
       defaultValue: [
         { id: 1, lastName: 'Doe', firstName: 'John', age: 30 },
         { id: 2, lastName: 'Smith', firstName: 'Anna', age: 24 },
-        // Add more example rows as needed
       ],
-      description: "Array of objects where each object represents a row in the data grid. Example: [{ id: 1, lastName: 'Doe', firstName: 'John', age: 30 }]",
+      description: "Array of objects where each object represents a row in the data grid.",
     },
-    
-    // Example 'columns' data structure
     columns: {
       type: 'object',
       defaultValue: [
@@ -33,16 +29,29 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { field: 'firstName', headerName: 'First name', width: 150, editable: true },
         { field: 'lastName', headerName: 'Last name', width: 150, editable: true },
         { field: 'age', headerName: 'Age', type: 'number', width: 110, editable: true },
-        // Add more example columns as needed
       ],
-      description: "Array of column definitions. Example: [{ field: 'id', headerName: 'ID', width: 90 }]",
+      description: "Array of column definitions.",
     },
     pageSizeOptions: {
       type: "object",
       description: "JSON array of numbers indicating available page sizes, e.g., [25, 50, 100]",
-      defaultValue: [25, 50]
+      defaultValue: [25, 50, 100]
+    },
+    // Adding the style prop to allow for size customization
+    style: {
+      type: "object",
+      description: "CSSProperties object for custom styling, e.g., to adjust width and height.",
+      defaultValue: {
+        width: '100%', // Default width
+        height: '400px', // Default height
+      }
     }
-  }
+  },
+  // Ensure the component can be styled directly from Plasmic Studio
+  defaultStyles: {
+    width: '100%',
+    height: '400px',
+  },
 });
 
 export default PLASMIC;
