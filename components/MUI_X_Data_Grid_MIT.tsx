@@ -8,13 +8,15 @@ interface DataGridDemoProps {
   pageSizeOptions: Array<number
   | { label: string, value: number }>;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
   columns,
   pageSizeOptions,
-  className
+  className,
+  style
 }) => {
   // Using 'any' to bypass TypeScript checks as a last resort
   const dataGridProps: any = {
@@ -25,7 +27,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   };
 
   return (
-    <Box sx={{ height: 400, width: '100%' }} className={className}>
+    <Box sx={{ height: 400, width: '100%' }} className={className} style={style}>
       <DataGrid {...dataGridProps} />
     </Box>
   );
