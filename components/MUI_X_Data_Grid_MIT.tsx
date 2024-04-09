@@ -7,21 +7,18 @@ interface DataGridDemoProps {
   columns: GridColDef[];
   pageSizeOptions: Array<number
   | { label: string, value: number }>;
-  paginationModel: { page: number; pageSize: number }; 
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
   columns,
   pageSizeOptions,
-  paginationModel
 }) => {
   // Using 'any' to bypass TypeScript checks as a last resort
   const dataGridProps: any = {
     rows,
     columns,
     pageSizeOptions,
-    paginationModel,
     checkboxSelection: true,
   };
 

@@ -41,14 +41,6 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: "object",
       description: "JSON array of numbers indicating available page sizes, e.g., [25, 50, 100]",
       defaultValue: [25, 50, 100]
-    },
-    paginationModel: {
-      type: "object",
-      description: "Object containing pagination settings: current page and page size.",
-      defaultValue: {
-        page: 1,
-        pageSize: 5,
-      }
     }
   }
 });
