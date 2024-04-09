@@ -46,9 +46,9 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'color',
       defaultValue: '#333', // Default cell text color
     },
-    headerBackgroundColor: {
+    headerTextColor: {
       type: 'color',
-      defaultValue: '#eee', // Default header background color
+      defaultValue: '#333', // Default header background color
     }
   },
   classNameProp: "className"
