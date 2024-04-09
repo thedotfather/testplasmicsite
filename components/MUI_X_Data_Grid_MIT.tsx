@@ -10,17 +10,13 @@ interface DataGridDemoProps {
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
-  columns,
-  pageSize = 5,
+  columns
 }) => {
   // Using 'any' to bypass TypeScript checks as a last resort
   const dataGridProps: any = {
     rows,
     columns,
-    pageSizeOptions :Array<number
-    | { label: string, value: number }>,
     checkboxSelection: true,
-    
   };
 
   return (
