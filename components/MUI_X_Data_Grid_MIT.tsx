@@ -11,6 +11,7 @@ interface DataGridDemoProps {
   font: string; // Custom prop for font
   className?: string; // Allows custom class names for styling
   checkboxSelection: boolean; // Prop for enabling checkbox selection
+  onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -22,22 +23,13 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   font,
   className,
   checkboxSelection,
+  onRowClick,
 }) => {
-  // State for storing the selected row and its key
-  const [selectedRow, setSelectedRow] = React.useState<any>(null);
-  const [selectedRowKey, setSelectedRowKey] = React.useState<number | string | null>(null);
-
-  // Handler for row click events
-  const onRowClick = React.useCallback((params: GridRowParams, event: React.MouseEvent<HTMLElement>) => {
-    setSelectedRow(params.row);
-    setSelectedRowKey(params.id);
-    // Additional logic for the click event can be placed here
-  }, []);
-
+  // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
     columns,
-    pageSizeOptions,
+    pageSizeOptions, // Assuming the first value as the default page size
     checkboxSelection,
     onRowClick,
   };
@@ -49,7 +41,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
-            fontFamily: font, // Corrected to 'fontFamily' for JSX syntax
+            fontFamily: font, // Using 'fontFamily' instead of 'font-family' for JSX syntax
           },
           '& .MuiDataGrid-columnHeaders': {
             color: headerTextColor,
