@@ -66,7 +66,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     onRowClick: {
       type: "eventHandler",
       argTypes: [
-        { name: "params", type: "object" },
+        { name: "params", type: "object"},
         { name: "event", type: "object" }
       ],
       description: "Function called when a row is clicked"

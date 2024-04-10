@@ -1,18 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp, GridRowParams  } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
   columns: GridColDef[];
-  pageSizeOptions: Array<number
-  | { label: string, value: number }>;
+  pageSizeOptions: Array<number | { label: string, value: number }>;
   cellTextColor?: string; // Custom prop for cell text color
-  headerTextColor?: string; // Custom prop for header background color
-  font: string;
-  className?: string;
-  checkboxSelection : boolean;
-  onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void;
+  headerTextColor?: string; // Custom prop for header text color
+  font: string; // Custom prop for font
+  className?: string; // Allows custom class names for styling
+  checkboxSelection: boolean; // Prop for enabling checkbox selection
+  onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -22,31 +21,33 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   cellTextColor,
   headerTextColor,
   font,
-  checkboxSelection,
   className,
-  onRowClick
+  checkboxSelection,
+  onRowClick,
 }) => {
-  // Using 'any' to bypass TypeScript checks as a last resort
+  // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
     columns,
-    pageSizeOptions,
+    pageSize: pageSizeOptions[0], // Assuming the first value as the default page size
     checkboxSelection,
-    onRowClick
+    onRowClick,
   };
 
   return (
     <Box sx={{ height: 400, width: '100%' }} className={className}>
-      <DataGrid {...dataGridProps} sx={{
+      <DataGrid
+        {...dataGridProps}
+        sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
-            'font-family': font,
+            fontFamily: font, // Using 'fontFamily' instead of 'font-family' for JSX syntax
           },
           '& .MuiDataGrid-columnHeaders': {
             color: headerTextColor,
-            'font-family': font,
+            fontFamily: font,
           },
-        }} 
+        }}
       />
     </Box>
   );
