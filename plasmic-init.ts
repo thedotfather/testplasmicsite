@@ -70,16 +70,12 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { name: "event", type: "object" }
       ],
       description: "Function called when a row is clicked"
-    },
-    selectedRow: {
-      type: "object"
     }
   },
   states: {
     selectedRow: {
-      type: "writable",
+      type: "readonly",
       variableType: 'object',
-      valueProp: 'selectedRow',
       onChangeProp: 'onRowClick'
     },
     /* selectedRowKey: {
