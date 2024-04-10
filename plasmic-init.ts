@@ -62,6 +62,15 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     checkboxSelection: {
       type: 'boolean',
       defaultValue: false
+    },
+    onRowClick: {
+      type: "eventHandler",
+      argTypes: [
+        { name: "params", type: "object" },
+        { name: "event", type: "object" },
+        { name: "details", type: "object" }
+      ],
+      description: "Function called when a row is clicked"
     }
   },
   classNameProp: "className"

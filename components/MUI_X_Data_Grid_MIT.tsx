@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams  } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -12,6 +12,7 @@ interface DataGridDemoProps {
   font: string;
   className?: string;
   checkboxSelection : boolean;
+  onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -22,7 +23,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   headerTextColor,
   font,
   checkboxSelection,
-  className
+  className,
+  onRowClick
 }) => {
   // Using 'any' to bypass TypeScript checks as a last resort
   const dataGridProps: any = {
@@ -30,6 +32,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     columns,
     pageSizeOptions,
     checkboxSelection,
+    onRowClick
   };
 
   return (
@@ -43,7 +46,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
             color: headerTextColor,
             'font-family': font,
           },
-        }} />
+        }} 
+      />
     </Box>
   );
 };
