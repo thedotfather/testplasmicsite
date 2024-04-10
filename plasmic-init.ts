@@ -76,7 +76,8 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
     selectedRow: {
       type: "readonly",
       variableType: 'object',
-      onChangeProp: 'onRowClick'
+      onChangeProp: 'onRowClick',
+      onChangeArgsToValue: (params) => params.row
     },
     /* selectedRowKey: {
       type: "writable",
