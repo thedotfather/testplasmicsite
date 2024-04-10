@@ -29,7 +29,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   const dataGridProps: any = {
     rows,
     columns,
-    pageSize: pageSizeOptions[0], // Assuming the first value as the default page size
+    pageSizeOptions, // Assuming the first value as the default page size
     checkboxSelection,
     onRowClick,
   };
