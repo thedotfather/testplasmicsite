@@ -77,13 +77,14 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: "readonly",
       variableType: 'object',
       onChangeProp: 'onRowClick',
-      onChangeArgsToValue: (params) => params.row
+      onChangeArgsToValue: (params: any) => params.row
     },
-    /* selectedRowKey: {
-      type: "writable",
-      defaultValue: null,
-      description: "Stores the key of the selected row",
-    }, */
+    selectedRowKey: {
+      type: "readonly",
+      variableType: 'text',
+      onChangeProp: 'onRowClick',
+      onChangeArgsToValue: (params: any) => params.id
+    }
   },
   classNameProp: "className",
 });
