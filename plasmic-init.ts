@@ -63,6 +63,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: false
     },
+    /* rowKey: {
+      type: 'string',
+      defaultValue: "id"
+    }, */
     onRowClick: {
       type: "eventHandler",
       argTypes: [
