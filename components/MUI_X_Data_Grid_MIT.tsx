@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, useGridApiRef, GridCellModesModel } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -31,13 +31,22 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onCellEditStop,
   processRowUpdate
 }) => {
+  const apiRef = useGridApiRef();
+  const [cellModesModel, setCellModesModel] = React.useState<GridCellModesModel>({});
 
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
-    if (processRowUpdate) {
-      return processRowUpdate(newRow, oldRow);
-    }
-    return newRow;
+    const updatedRow = processRowUpdate ? processRowUpdate(newRow, oldRow) : newRow;
+    // Set the cell mode to view after processing update
+    setCellModesModel({
+      ...cellModesModel,
+      [newRow.id]: {
+        ...cellModesModel[newRow.id],
+        [newRow.field]: { mode: 'view' }
+      }
+    });
+    return updatedRow;
   };
+  
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
@@ -47,7 +56,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     onRowClick,
     onCellClick,
     onCellEditStop,
-    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
+    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
+    apiRef
   };
 
   return (
