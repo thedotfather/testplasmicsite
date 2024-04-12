@@ -70,6 +70,14 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { name: "event", type: "object" }
       ],
       description: "Function called when a row is clicked"
+    },
+    onCellClick: {
+      type: "eventHandler",
+      argTypes: [
+        { name: "params", type: "object"},
+        { name: "event", type: "object" }
+      ],
+      description: "Function called when a cell is clicked"
     }
   },
   states: {
@@ -86,7 +94,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       onChangeArgsToValue: (params: any) => params.id
     }
   },
-  classNameProp: "className",
+  classNameProp: "className"
 });
 
 export default PLASMIC;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp, GridRowParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -12,6 +12,7 @@ interface DataGridDemoProps {
   className?: string; // Allows custom class names for styling
   checkboxSelection: boolean; // Prop for enabling checkbox selection
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
+  onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -24,14 +25,16 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   className,
   checkboxSelection,
   onRowClick,
+  onCellClick
 }) => {
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
     columns,
-    pageSizeOptions, // Assuming the first value as the default page size
+    pageSizeOptions,
     checkboxSelection,
     onRowClick,
+    onCellClick
   };
 
   return (
@@ -41,7 +44,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
-            fontFamily: font, // Using 'fontFamily' instead of 'font-family' for JSX syntax
+            fontFamily: font,
           },
           '& .MuiDataGrid-columnHeaders': {
             color: headerTextColor,
