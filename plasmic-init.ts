@@ -87,7 +87,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       ],
       description: "Function called when a cell is edited"
     },
-    handleProcessRowUpdate: {
+    processRowUpdate: {
       type: "eventHandler",
       argTypes: [
         { name: "newRow", type: "object"},

@@ -44,7 +44,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     onRowClick,
     onCellClick,
     onCellEditStop,
-    processRowUpdate: handleProcessRowUpdate
+    processRowUpdate: processRowUpdate, handleProcessRowUpdate
   };
 
   return (
