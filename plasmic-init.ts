@@ -79,7 +79,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       ],
       description: "Function called when a cell is clicked"
     },
-    onCellEdited: {
+    onCellEditStop: {
       type: "eventHandler",
       argTypes: [
         { name: "params", type: "object"},
