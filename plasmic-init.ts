@@ -30,9 +30,9 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'object',
       defaultValue: [
         { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'firstName', headerName: 'First name', width: 150, editable: true },
-        { field: 'lastName', headerName: 'Last name', width: 150, editable: true },
-        { field: 'age', headerName: 'Age', type: 'number', width: 110, editable: true },
+        { field: 'firstName', headerName: 'First name', width: 150, editable: false },
+        { field: 'lastName', headerName: 'Last name', width: 150, editable: false },
+        { field: 'age', headerName: 'Age', type: 'number', width: 110, editable: false },
         // Add more example columns as needed
       ],
       description: "Array of column definitions. Example: [{ field: 'id', headerName: 'ID', width: 90 }]",
@@ -92,6 +92,18 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       variableType: 'text',
       onChangeProp: 'onRowClick',
       onChangeArgsToValue: (params: any) => params.id
+    },
+    selectedCellField: {
+      type: 'readonly',
+      variableType: 'text',
+      onChangeProp: 'onCellClick',
+      onChangeArgsToValue: (params: any) => params.field
+    },
+    selectedCellValue: {
+      type: 'readonly',
+      variableType: 'text',
+      onChangeProp: 'onCellClick',
+      onChangeArgsToValue: (params: any) => params.formattedValue
     }
   },
   classNameProp: "className"
