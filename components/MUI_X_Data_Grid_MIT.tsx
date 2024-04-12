@@ -14,6 +14,7 @@ interface DataGridDemoProps {
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   onCellEditStop: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for when cell editing stops
+  processRowUpdate: (newRow: any, oldRow: any) => any;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -27,7 +28,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   checkboxSelection,
   onRowClick,
   onCellClick,
-  onCellEditStop
+  onCellEditStop,
+  processRowUpdate
 }) => {
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
@@ -37,7 +39,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection,
     onRowClick,
     onCellClick,
-    onCellEditStop
+    onCellEditStop,
+    processRowUpdate
   };
 
   return (
