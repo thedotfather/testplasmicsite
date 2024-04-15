@@ -33,16 +33,19 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   processRowUpdate,
   stopCellEditMode
 }) => {
+  const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
+    processRowUpdate(newRow, oldRow);
+  }
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
     columns,
-    pageSizeOptions,
+    pageSizeOptions,  
     checkboxSelection,
     onRowClick,
     onCellClick,
     onCellEditStop,
-    processRowUpdate: (newRow: any, oldRow: any) => stopCellEditMode//processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
+    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
   return (
