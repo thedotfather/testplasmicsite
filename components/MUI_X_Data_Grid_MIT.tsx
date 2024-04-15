@@ -11,10 +11,12 @@ interface DataGridDemoProps {
   font: string; // Custom prop for font
   className?: string; // Allows custom class names for styling
   checkboxSelection: boolean; // Prop for enabling checkbox selection
+  disableColumnSorting: boolean;
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
-  test: boolean
+  toolbarQuickSearch: boolean
+  
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -26,10 +28,11 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   font,
   className,
   checkboxSelection,
+  disableColumnSorting,
   onRowClick,
   onCellClick,
   processRowUpdate,
-  test
+  toolbarQuickSearch
 }) => {
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
@@ -42,10 +45,11 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     columns,
     pageSizeOptions,  
     checkboxSelection,
+    disableColumnSorting,
     onRowClick,
     onCellClick,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
-    test
+    toolbarQuickSearch
   };
 
   return (
@@ -55,7 +59,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
         slots={{ toolbar: GridToolbar }}
         slotProps={{
           toolbar: {
-            showQuickFilter: test, 
+            showQuickFilter: toolbarQuickSearch,
+
           },
         }}
         sx={{

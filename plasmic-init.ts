@@ -63,6 +63,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: false
     },
+    disableColumnSorting: {
+      type: 'boolean',
+      defaultValue: false
+    },
     onRowClick: {
       type: "eventHandler",
       argTypes: [
@@ -87,7 +91,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       ],
       description: "Function called when a cell is edited"
     },
-    test: {
+    toolbarQuickSearch: {
       type: 'boolean',
       defaultValue: true
     }
