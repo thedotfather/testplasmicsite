@@ -42,7 +42,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     onRowClick,
     onCellClick,
     onCellEditStop,
-    processRowUpdate: stopCellEditMode//processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
+    processRowUpdate: (newRow: any, oldRow: any) => stopCellEditMode//processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
   return (
