@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, useGridApiRef } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -31,6 +31,19 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onCellEditStop,
   processRowUpdate
 }) => {
+  const apiRef = useGridApiRef();
+  const [oldRowData, setOldRowData] = React.useState({});
+
+  const handleCellEditStart = (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => {
+    // Capture the old row data before editing starts
+    const oldRow = apiRef.current.getRow(params.id);
+    setOldRowData(oldRow);
+  };
+
+  const handleCellEditStop = (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => {
+    // Use the old row data captured on edit start and the new row from params
+    processRowUpdate(params.row, oldRowData);
+  };
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
@@ -39,14 +52,16 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection,
     onRowClick,
     onCellClick,
-    onCellEditStop,
-    processRowUpdate
+    onCellEditStop : (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => handleCellEditStop(params, event),
+    processRowUpdate //processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
   return (
     <Box sx={{ height: 400, width: '100%' }} className={className}>
       <DataGrid
         {...dataGridProps}
+        onCellEditStart={handleCellEditStart}
+        onCellEditStop={handleCellEditStop}
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
