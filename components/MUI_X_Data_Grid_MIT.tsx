@@ -35,14 +35,15 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
 }) => {
   const apiRef = useGridApiRef();
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
-    console.log("before");
-    processRowUpdate(newRow, oldRow);
-    apiRef.current.stopCellEditMode({
-      id: 1,
-      field: "age"
+    // Simulate a server-side update operation with a promise
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // Assuming no error occurs, we resolve the promise with the 'newRow' object
+        // You might want to modify 'newRow' here if needed
+        resolve(newRow);
+      }, 1000); // Simulate a delay for async operation
     });
-    console.log("after");
-  }
+  };
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
