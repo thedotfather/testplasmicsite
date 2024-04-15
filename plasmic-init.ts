@@ -86,6 +86,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { name: "oldRow", type: "object"},
       ],
       description: "Function called when a cell is edited"
+    },
+    test: {
+      type: 'boolean',
+      defaultValue: true
     }
   },
   states: {
