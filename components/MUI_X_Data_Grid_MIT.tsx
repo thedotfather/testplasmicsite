@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, GridCellEditStopParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, useGridApiRef, GridCellEditStopParams } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -33,8 +33,10 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   processRowUpdate,
   stopCellEditMode
 }) => {
+  const apiRef = useGridApiRef();
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
+    apiRef.current.stopCellEditMode;
   }
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
