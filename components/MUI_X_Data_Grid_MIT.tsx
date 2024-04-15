@@ -36,6 +36,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   const apiRef = useGridApiRef();
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     // Simulate a server-side update operation with a promise
+    processRowUpdate(newRow, oldRow);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Assuming no error occurs, we resolve the promise with the 'newRow' object
