@@ -41,9 +41,9 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
 
   const handleCellEditStop = (params: GridCellParams) => {
     // Process the row update after editing stops
-    if (oldRowData) {
-      processRowUpdate(params.row, oldRowData);
-    }
+    
+    return processRowUpdate(params.row, oldRowData);
+    
   };
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
