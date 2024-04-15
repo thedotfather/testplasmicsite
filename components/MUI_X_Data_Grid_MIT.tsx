@@ -38,11 +38,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     // Simulate a server-side update operation with a promise
     processRowUpdate(newRow, oldRow);
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Assuming no error occurs, we resolve the promise with the 'newRow' object
-        // You might want to modify 'newRow' here if needed
-        resolve(newRow);
-      }, 1000); // Simulate a delay for async operation
+      resolve(newRow); // Simulate a delay for async operation
     });
   };
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
