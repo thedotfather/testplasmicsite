@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, useGridApiRef, GridCellEditStopParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -13,9 +13,7 @@ interface DataGridDemoProps {
   checkboxSelection: boolean; // Prop for enabling checkbox selection
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
-  onCellEditStop: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for when cell editing stops
   processRowUpdate: (newRow: any, oldRow: any) => any;
-  stopCellEditMode: (params: GridCellEditStopParams) => void
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -29,19 +27,14 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   checkboxSelection,
   onRowClick,
   onCellClick,
-  onCellEditStop,
-  processRowUpdate,
-  stopCellEditMode
+  processRowUpdate
 }) => {
-  const apiRef = useGridApiRef();
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
-    // Simulate a server-side update operation with a promise
     processRowUpdate(newRow, oldRow);
     return new Promise((resolve, reject) => {
-      resolve(newRow); // Simulate a delay for async operation
+      resolve(newRow);
     });
   };
-  // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
     columns,
@@ -49,7 +42,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection,
     onRowClick,
     onCellClick,
-    onCellEditStop,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
