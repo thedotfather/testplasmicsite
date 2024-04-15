@@ -50,8 +50,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     disableColumnSelector,
     onRowClick,
     onCellClick,
-    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
-    toolbarQuickSearch
+    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
   return (
