@@ -80,6 +80,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       description: "Function called when a cell is clicked"
     },
     processRowUpdate: {
+      name:"On row update",
       type: "eventHandler",
       argTypes: [
         { name: "newRow", type: "object"},
