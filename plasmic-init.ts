@@ -67,6 +67,14 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: false
     },
+    disableColumnSelector: {
+      type: 'boolean',
+      defaultValue: false
+    },
+    toolbarQuickSearch: {
+      type: 'boolean',
+      defaultValue: true
+    },
     onRowClick: {
       type: "eventHandler",
       argTypes: [
@@ -90,10 +98,6 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { name: "oldRow", type: "object"},
       ],
       description: "Function called when a cell is edited"
-    },
-    toolbarQuickSearch: {
-      type: 'boolean',
-      defaultValue: true
     }
   },
   states: {
