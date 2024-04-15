@@ -31,20 +31,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onCellEditStop,
   processRowUpdate
 }) => {
-  const [oldRowData, setOldRowData] = React.useState<any>({});
-
-  const handleCellEditStart = (params: GridCellParams) => {
-    // Capture the old row data at the start of editing
-    const oldRow = rows.find(r => r.id === params.id);
-    setOldRowData(oldRow);
-  };
-
-  const handleCellEditStop = (params: GridCellParams) => {
-    // Process the row update after editing stops
-    
-    return processRowUpdate(params.row, oldRowData);
-    
-  };
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
     rows,
@@ -53,7 +39,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection,
     onRowClick,
     onCellClick,
-    //onCellEditStop : (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => handleCellEditStop(params, event),
+    onCellEditStop,
     processRowUpdate //processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
@@ -61,8 +47,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     <Box sx={{ height: 400, width: '100%' }} className={className}>
       <DataGrid
         {...dataGridProps}
-        onCellEditStart={handleCellEditStart}
-        onCellEditStop={handleCellEditStop}
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
