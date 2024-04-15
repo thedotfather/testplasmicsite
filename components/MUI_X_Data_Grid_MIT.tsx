@@ -31,18 +31,19 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onCellEditStop,
   processRowUpdate
 }) => {
-  const apiRef = useGridApiRef();
-  const [oldRowData, setOldRowData] = React.useState({});
+  const [oldRowData, setOldRowData] = React.useState<any>({});
 
-  const handleCellEditStart = (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => {
-    // Capture the old row data before editing starts
-    const oldRow = apiRef.current.getRow(params.id);
+  const handleCellEditStart = (params: GridCellParams) => {
+    // Capture the old row data at the start of editing
+    const oldRow = rows.find(r => r.id === params.id);
     setOldRowData(oldRow);
   };
 
-  const handleCellEditStop = (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => {
-    // Use the old row data captured on edit start and the new row from params
-    processRowUpdate(params.row, oldRowData);
+  const handleCellEditStop = (params: GridCellParams) => {
+    // Process the row update after editing stops
+    if (oldRowData) {
+      processRowUpdate(params.row, oldRowData);
+    }
   };
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
@@ -52,7 +53,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection,
     onRowClick,
     onCellClick,
-    onCellEditStop : (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => handleCellEditStop(params, event),
+    //onCellEditStop : (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => handleCellEditStop(params, event),
     processRowUpdate //processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
   };
 
