@@ -35,8 +35,10 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
 }) => {
   const apiRef = useGridApiRef();
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
+    console.log("before");
     processRowUpdate(newRow, oldRow);
     apiRef.current.stopCellEditMode;
+    console.log("after");
   }
   // 'dataGridProps' uses 'any' type to bypass TypeScript checks for additional props like 'onRowClick'
   const dataGridProps: any = {
