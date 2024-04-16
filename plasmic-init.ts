@@ -71,6 +71,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: false
     },
+    disableDensitySelector: {
+      type: 'boolean',
+      defaultValue: false
+    },
     toolbarQuickSearch: {
       type: 'boolean',
       defaultValue: true
