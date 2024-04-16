@@ -38,7 +38,11 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
     return new Promise((resolve, reject) => {
-      resolve(newRow);
+      if (newRow && Object.keys(newRow).length !== 0) {
+        resolve(newRow); // Resolves with the newRow when it's not empty
+      } else {
+        resolve({}); // Resolves with an empty object or another default value when newRow is empty
+      }
     });
   };
   const dataGridProps: any = {
