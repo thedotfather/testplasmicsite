@@ -79,20 +79,9 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: true
     },
-    showExportButton: {
+    exportButton: {
       type: 'boolean',
       defaultValue: true
-    },
-    toolbarItems: {
-      type: 'choice',
-      options: [
-        {value: true, label: "Columns"},
-        {value: true, label: "Filters"},
-        {value: true, label: "Density"},
-        {value: true, label: "Export"},
-        {value: true, label: "Search"}
-      ],
-      multiSelect: true
     },
     onRowClick: {
       type: "eventHandler",

@@ -11,11 +11,11 @@ interface DataGridDemoProps {
   font: string; // Custom prop for font
   className?: string; // Allows custom class names for styling
   checkboxSelection: boolean; // Prop for enabling checkbox selection
-  disableColumnSorting: boolean;
-  toolbarQuickSearch: boolean;
-  disableColumnSelector: boolean;
-  disableDensitySelector: boolean;
-  showExportButton: boolean;
+  columnsButton: boolean;
+  filtersButton: boolean;
+  densityButton: boolean;
+  exportButton: boolean;
+  searchBar: boolean;
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
@@ -30,14 +30,14 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   font,
   className,
   checkboxSelection,
-  disableColumnSorting,
-  disableColumnSelector,
-  disableDensitySelector,
+  columnsButton,
+  filtersButton,
+  densityButton,
+  exportButton,
+  searchBar,
   onRowClick,
   onCellClick,
-  processRowUpdate,
-  toolbarQuickSearch,
-  showExportButton
+  processRowUpdate
 }) => {
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
@@ -50,9 +50,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     columns,
     pageSizeOptions,  
     checkboxSelection,
-    disableColumnSorting,
-    disableColumnSelector,
-    disableDensitySelector,
     onRowClick,
     onCellClick,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
@@ -63,11 +60,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       <DataGrid
         {...dataGridProps}
         slots={{ toolbar: CustomToolbar }}
-        slotProps={{
-          toolbar: {
-            showQuickFilter: toolbarQuickSearch
-          },
-        }}
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
@@ -84,14 +76,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   
   function CustomToolbar() {
     return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        {showExportButton && <GridToolbarExport />}
-        <Box sx={{ flexGrow: 1 }} />
-        <GridToolbarQuickFilter />
-      </GridToolbarContainer>
+      ""
     );
   }
 };
