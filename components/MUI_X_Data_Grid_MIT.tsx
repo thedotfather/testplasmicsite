@@ -55,13 +55,13 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     onRowClick,
     onCellClick,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
-    slots: toolbar ? { Toolbar: CustomToolbar } : undefined
   };
 
   return (
     <Box sx={{ height: 400, width: '100%' }} className={className}>
       <DataGrid
         {...dataGridProps}
+        slots={{ toolbar: toolbar ? CustomToolbar : null }}
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
