@@ -87,6 +87,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: true
     },
+    hideFooterPagination: {
+      type: 'boolean',
+      defaultValue: false
+    },
     onRowClick: {
       type: "eventHandler",
       argTypes: [

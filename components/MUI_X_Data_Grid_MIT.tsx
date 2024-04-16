@@ -17,6 +17,7 @@ interface DataGridDemoProps {
   densityButton: boolean;
   exportButton: boolean;
   searchBar: boolean;
+  hideFooterPagination: boolean;
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
@@ -37,6 +38,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   densityButton,
   exportButton,
   searchBar,
+  hideFooterPagination,
   onRowClick,
   onCellClick,
   processRowUpdate
@@ -52,6 +54,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     columns,
     pageSizeOptions,  
     checkboxSelection,
+    hideFooterPagination,
     onRowClick,
     onCellClick,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
