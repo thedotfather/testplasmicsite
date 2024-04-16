@@ -76,7 +76,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
             color: headerTextColor,
             fontFamily: font,
           },
-          '& .MuiDataGrid-container--top':{
+          '& .MuiDataGrid-toolbarContainer':{
             color: toolbarColor
           }
         }}
