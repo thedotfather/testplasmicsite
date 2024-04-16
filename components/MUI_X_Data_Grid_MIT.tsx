@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridToolbar, GridColDef, GridRowsProp, GridRowParams, GridCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar, GridColDef, GridRowsProp, GridRowParams, GridCellParams, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -60,7 +60,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     <Box sx={{ height: 400, width: '100%' }} className={className}>
       <DataGrid
         {...dataGridProps}
-        slots={{ toolbar: GridToolbar }}
+        slots={{ toolbar: CustomToolbar }}
         slotProps={{
           toolbar: {
             showQuickFilter: toolbarQuickSearch
@@ -80,5 +80,13 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     </Box>
   );
 };
+
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  );
+}
 
 export default DataGridDemo;
