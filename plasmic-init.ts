@@ -63,17 +63,21 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: false
     },
+    toolbar: {
+      type: 'boolean',
+      defaultValue: true,
+    },
     columnsButton: {
       type: 'boolean',
-      defaultValue: false
+      defaultValue: true
     },
     filtersButton: {
       type: 'boolean',
-      defaultValue: false
+      defaultValue: true
     },
     densityButton: {
       type: 'boolean',
-      defaultValue: false
+      defaultValue: true
     },
     exportButton: {
       type: 'boolean',
