@@ -15,6 +15,7 @@ interface DataGridDemoProps {
   toolbarQuickSearch: boolean;
   disableColumnSelector: boolean;
   disableDensitySelector: boolean;
+  showExportButton: boolean;
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
@@ -35,7 +36,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onRowClick,
   onCellClick,
   processRowUpdate,
-  toolbarQuickSearch
+  toolbarQuickSearch,
+  showExportButton
 }) => {
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
@@ -79,17 +81,19 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       />
     </Box>
   );
+  
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+        {showExportButton && <GridToolbarExport />}
+      </GridToolbarContainer>
+    );
+  }
 };
 
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarColumnsButton />
-      <GridToolbarFilterButton />
-      <GridToolbarDensitySelector />
-      <GridToolbarExport />
-    </GridToolbarContainer>
-  );
-}
+
 
 export default DataGridDemo;

@@ -79,6 +79,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: true
     },
+    showExportButton: {
+      type: 'boolean',
+      defaultValue: true
+    },
     onRowClick: {
       type: "eventHandler",
       argTypes: [
