@@ -50,6 +50,10 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'color',
       defaultValue: '#333' // Default header background color
     },
+    toolbarColor: {
+      type: 'color',
+      defaultValue: '#333'
+    },
     font: {
       type: 'choice',
       options: [
