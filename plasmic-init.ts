@@ -63,23 +63,23 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: 'boolean',
       defaultValue: false
     },
-    disableColumnSorting: {
+    columnsButton: {
       type: 'boolean',
       defaultValue: false
     },
-    disableColumnSelector: {
+    filtersButton: {
       type: 'boolean',
       defaultValue: false
     },
-    disableDensitySelector: {
+    densityButton: {
       type: 'boolean',
       defaultValue: false
     },
-    toolbarQuickSearch: {
+    exportButton: {
       type: 'boolean',
       defaultValue: true
     },
-    exportButton: {
+    searchBar: {
       type: 'boolean',
       defaultValue: true
     },

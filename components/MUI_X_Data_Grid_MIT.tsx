@@ -11,6 +11,7 @@ interface DataGridDemoProps {
   font: string; // Custom prop for font
   className?: string; // Allows custom class names for styling
   checkboxSelection: boolean; // Prop for enabling checkbox selection
+  toolbar: boolean;
   columnsButton: boolean;
   filtersButton: boolean;
   densityButton: boolean;
@@ -30,6 +31,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   font,
   className,
   checkboxSelection,
+  toolbar,
   columnsButton,
   filtersButton,
   densityButton,
@@ -52,14 +54,15 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     checkboxSelection,
     onRowClick,
     onCellClick,
-    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow)
+    processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
+    components: toolbar ? { Toolbar: CustomToolbar } : undefined
   };
 
   return (
     <Box sx={{ height: 400, width: '100%' }} className={className}>
       <DataGrid
         {...dataGridProps}
-        slots={{ toolbar: CustomToolbar }}
+        
         sx={{
           '& .MuiDataGrid-cell': {
             color: cellTextColor,
@@ -76,7 +79,14 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   
   function CustomToolbar() {
     return (
-      ""
+      <GridToolbarContainer>
+        {columnsButton && <GridToolbarColumnsButton />}
+        {filtersButton && <GridToolbarFilterButton />}
+        {densityButton && <GridToolbarDensitySelector />}
+        {exportButton && <GridToolbarExport />}
+        <Box sx={{ flexGrow: 1 }} />
+        {searchBar && <GridToolbarQuickFilter />}
+      </GridToolbarContainer>
     );
   }
 };
