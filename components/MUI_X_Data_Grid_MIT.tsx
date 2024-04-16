@@ -89,6 +89,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         {showExportButton && <GridToolbarExport />}
+        <Box sx={{ flexGrow: 1 }} />
         <GridToolbarQuickFilter />
       </GridToolbarContainer>
     );
