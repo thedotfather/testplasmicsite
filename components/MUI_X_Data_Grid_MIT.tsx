@@ -33,30 +33,14 @@ interface DataGridDemoProps {
 }
 
 const iconMapping = {
-  delete: <DeleteIcon />,
-  print: <PrintIcon />,
+  Delete: <DeleteIcon />,
+  Print: <PrintIcon />,
 };
 
 interface ActionConfig {
-  iconType: string;
+  iconType: keyof typeof iconMapping;
   actionEventName: string;
 }
-
-// Define the icons state with a specific index signature
-interface IconsState {
-  [key: string]: React.ComponentType<any> | null;
-}
-
-const loadIcon = async (iconName: string): Promise<React.ComponentType<any> | null> => {
-  if (!iconName) return null;
-  try {
-    const icon = require(`@mui/icons-material/Error`).default;
-    return icon;
-  } catch (error) {
-    console.error("Failed to load icon: ", iconName);
-    return ErrorIcon; // Return the ErrorIcon as a fallback
-  }
-};
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
@@ -91,32 +75,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     });
   };
 
-  const [icons, setIcons] = React.useState<Record<string, React.ComponentType>>({});
-
-  React.useEffect(() => {
-    const loadIcons = async () => {
-      const defaultIconModule = await import('@mui/icons-material/Error');
-      const defaultIcon = defaultIconModule.default;
-      const newIcons: Record<string, React.ComponentType> = {};
-
-      for (const action of actions) {
-        try {
-          const iconPath = '@mui/icons-material/' + action.iconType;
-          const iconModule = await import(iconPath);
-          newIcons[action.iconType] = iconModule.default;
-        } catch (error) {
-          console.error(`Error loading icon ${action.iconType}:`, error);
-          newIcons[action.iconType] = defaultIcon; // Use ErrorIcon as fallback
-        }
-      }
-
-      setIcons(newIcons);
-    };
-
-    loadIcons();
-  }, [actions]);
-  
-
   const augmentedColumns = [
     ...columns,
     {
@@ -125,7 +83,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       getActions: (params: GridRowParams) => actions.map(action => (
         <GridActionsCellItem
           key={`${params.id}-${action.iconType}`}
-          icon={React.createElement(icons[action.iconType] || ErrorIcon)}
+          icon={iconMapping[action.iconType]}
           onClick={() => onAction(action.actionEventName, params.row)}
           label={action.iconType}
         />
