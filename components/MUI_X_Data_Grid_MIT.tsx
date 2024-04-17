@@ -94,20 +94,21 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   const [icons, setIcons] = React.useState<Record<string, React.ComponentType>>({});
 
   React.useEffect(() => {
-    const defaultIcon = require('@mui/icons-material/Error').default;
-
-    const loadIcons = () => {
+    const loadIcons = async () => {
+      const defaultIconModule = await import('@mui/icons-material/Error');
+      const defaultIcon = defaultIconModule.default;
       const newIcons: Record<string, React.ComponentType> = {};
-      actions.forEach(action => {
+
+      for (const action of actions) {
         try {
-          const iconPath = '@mui/icons-material/' + action.iconType;
-          const iconModule = require(iconPath).default;
-          newIcons[action.iconType] = iconModule;
+          const iconModule = await import(`@mui/icons-material/${action.iconType}`).catch(() => ({ default: defaultIcon }));
+          newIcons[action.iconType] = iconModule.default;
         } catch (error) {
           console.error(`Error loading icon ${action.iconType}:`, error);
           newIcons[action.iconType] = defaultIcon; // Use ErrorIcon as fallback
         }
-      });
+      }
+
       setIcons(newIcons);
     };
 
