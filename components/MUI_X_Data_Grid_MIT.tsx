@@ -28,7 +28,7 @@ interface DataGridDemoProps {
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
-  onRowAction: (actionType: string, row: any) => void;
+  onRowAction: (action: string, row: any) => void;
 }
 
 const iconMapping = {
@@ -37,8 +37,8 @@ const iconMapping = {
 };
 
 interface ActionConfig {
-  iconType: keyof typeof iconMapping;
-  actionEventName: string;
+  icon: keyof typeof iconMapping;
+  action: string;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -78,10 +78,11 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       type: 'actions',
       getActions: (params: GridRowParams) => rowActions.map(action => (
         <GridActionsCellItem
-          key={`${params.id}-${action.iconType}`}
-          icon={iconMapping[action.iconType]}
-          onClick={() => onRowAction(action.actionEventName, params.row)}
-          label={action.iconType}
+          key={`${params.id}-${action.icon}`}
+          icon={iconMapping[action.icon
+          ]}
+          onClick={() => onRowAction(action.action, params.row)}
+          label={action.icon}
         />
       )),
     },
