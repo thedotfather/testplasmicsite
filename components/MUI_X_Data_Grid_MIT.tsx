@@ -102,7 +102,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       for (const action of actions) {
         try {
           const iconPath = '@mui/icons-material/' + action.iconType;
-          const iconModule = await import(iconPath).catch(() => ({ default: defaultIcon }));
+          const iconModule = await import(iconPath);
           newIcons[action.iconType] = iconModule.default;
         } catch (error) {
           console.error(`Error loading icon ${action.iconType}:`, error);
