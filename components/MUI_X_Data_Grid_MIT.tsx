@@ -4,8 +4,6 @@ import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, Grid
 import DeleteIcon from '@mui/icons-material/Delete';
 import PrintIcon from '@mui/icons-material/Print';
 import ErrorIcon from '@mui/icons-material/Error'; // Fallback icon
-import * as Icons from '@mui/icons-material'; // Import all icons
-import { SvgIconComponent } from '@mui/icons-material';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -77,11 +75,6 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     });
   };
 
-  const getIcon = (iconName: string): React.ReactElement => {
-    const Icon = Icons[iconName as keyof typeof Icons] as SvgIconComponent;
-    return Icon ? <Icon /> : <ErrorIcon />;
-  };
-  
   const augmentedColumns = [
     ...columns,
     {
@@ -90,7 +83,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       getActions: (params: GridRowParams) => actions.map(action => (
         <GridActionsCellItem
           key={`${params.id}-${action.iconType}`}
-          icon={getIcon(action.iconType)}
+          icon={iconMapping[action.iconType]}
           onClick={() => onAction(action.actionEventName, params.row)}
           label={action.iconType}
         />
