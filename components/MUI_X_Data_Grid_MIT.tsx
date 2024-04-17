@@ -42,10 +42,21 @@ interface ActionConfig {
   actionEventName: string;
 }
 
-const defaultAction: ActionConfig[] = [{
-  iconType: 'Error', // Ensure this corresponds to an actual icon file like ErrorIcon
-  actionEventName: 'defaultAction'
-}];
+// Define the icons state with a specific index signature
+interface IconsState {
+  [key: string]: React.ComponentType<any> | null;
+}
+
+const loadIcon = async (iconName: string): Promise<React.ComponentType<any> | null> => {
+  if (!iconName) return null;
+  try {
+    const icon = require(`@mui/icons-material/${iconName}`).default;
+    return icon;
+  } catch (error) {
+    console.error("Failed to load icon: ", iconName);
+    return ErrorIcon; // Return the ErrorIcon as a fallback
+  }
+};
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
@@ -67,7 +78,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onRowClick,
   onCellClick,
   processRowUpdate,
-  actions = defaultAction,
+  actions,
   onAction,
   eventHandlers,
   onDelete,
@@ -80,22 +91,15 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     });
   };
 
-  
-  const [icons, setIcons] = React.useState<Record<string, React.ComponentType>>({});
+  const [icons, setIcons] = React.useState<IconsState>({});  // Use the defined IconsState
 
   React.useEffect(() => {
     const loadIcons = async () => {
-      const iconPromises = actions.map(async action => {
-        try {
-          const icon = await import(`@mui/icons-material/${action.iconType}`);
-          return { icon: icon.default, iconType: action.iconType };
-        } catch (error) {
-          console.error(`Error loading icon ${action.iconType}:`, error);
-          return { icon: ErrorIcon, iconType: action.iconType }; // Fallback to ErrorIcon in case of failure
-        }
-      });
+      const iconPromises = actions.map(action =>
+        loadIcon(action.iconType).then(icon => ({ icon, iconType: action.iconType }))
+      );
       const loadedIcons = await Promise.all(iconPromises);
-      const newIcons = loadedIcons.reduce<Record<string, React.ComponentType>>((acc, { iconType, icon }) => {
+      const newIcons = loadedIcons.reduce<IconsState>((acc, { iconType, icon }) => {
         acc[iconType] = icon;
         return acc;
       }, {});
