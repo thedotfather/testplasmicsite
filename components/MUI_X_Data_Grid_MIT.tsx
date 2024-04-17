@@ -50,10 +50,7 @@ interface IconsState {
 const loadIcon = async (iconName: string): Promise<React.ComponentType<any> | null> => {
   if (!iconName) return null;
   try {
-    if (iconName.length < 3){
-      iconName = 'Error';
-    }
-    const icon = require(`@mui/icons-material/${iconName}`).default;
+    const icon = require(`@mui/icons-material/Error`).default;
     return icon;
   } catch (error) {
     console.error("Failed to load icon: ", iconName);
