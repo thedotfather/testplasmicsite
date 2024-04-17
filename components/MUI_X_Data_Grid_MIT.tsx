@@ -63,8 +63,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       field: 'actions',
       type: 'actions',
       getActions: (params: GridRowParams) => [
-        <GridActionsCellItem icon={<DeleteIcon />} onClick={() => onDelete(params.id)} label="Delete" />,
-        <GridActionsCellItem icon={<PrintIcon />} onClick={() => onPrint(params.id)} label="Print" showInMenu />,
+        <GridActionsCellItem  key={`${params.id}-delete`} icon={<DeleteIcon />} onClick={() => onDelete(params.id)} label="Delete" />,
+        <GridActionsCellItem key={`${params.id}-print`} icon={<PrintIcon />} onClick={() => onPrint(params.id)} label="Print" showInMenu />,
       ],
     },
   ];
