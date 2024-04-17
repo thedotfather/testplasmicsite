@@ -119,7 +119,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       ],
       description: "Function called when a cell is edited"
     },
-    actions: {
+    rowActions: {
       type: "object",
       description: "Actions configuration with icon types and event names",
       defaultValue: [
@@ -127,7 +127,7 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { iconType: 'Print', actionEventName: 'onPrint' }
       ]
     },
-    onAction: {
+    onRowAction: {
       type: "eventHandler",
       description: "Handler for action clicks",
       argTypes: [

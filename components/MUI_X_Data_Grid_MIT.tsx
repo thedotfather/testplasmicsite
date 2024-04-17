@@ -8,8 +8,7 @@ import ErrorIcon from '@mui/icons-material/Error'; // Fallback icon
 interface DataGridDemoProps {
   rows: GridRowsProp;
   columns: GridColDef[];
-  actions: ActionConfig[];
-  eventHandlers: Record<string, (id: any) => void>;
+  rowActions: ActionConfig[];
   pageSizeOptions: Array<number | { label: string, value: number }>;
   cellTextColor?: string; // Custom prop for cell text color
   headerTextColor?: string; // Custom prop for header text color
@@ -29,7 +28,7 @@ interface DataGridDemoProps {
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
-  onAction: (actionType: string, row: any) => void;
+  onRowAction: (actionType: string, row: any) => void;
 }
 
 const iconMapping = {
@@ -62,11 +61,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onRowClick,
   onCellClick,
   processRowUpdate,
-  actions,
-  onAction,
-  eventHandlers,
-  onDelete,
-  onPrint
+  rowActions,
+  onRowAction
 }) => {
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
@@ -80,11 +76,11 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     {
       field: 'actions',
       type: 'actions',
-      getActions: (params: GridRowParams) => actions.map(action => (
+      getActions: (params: GridRowParams) => rowActions.map(action => (
         <GridActionsCellItem
           key={`${params.id}-${action.iconType}`}
           icon={iconMapping[action.iconType]}
-          onClick={() => onAction(action.actionEventName, params.row)}
+          onClick={() => onRowAction(action.actionEventName, params.row)}
           label={action.iconType}
         />
       )),
@@ -99,7 +95,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     onRowClick,
     onCellClick,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
-    onAction
+    onRowAction
   };
 
   return (
