@@ -118,7 +118,17 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { name: "oldRow", type: "object"},
       ],
       description: "Function called when a cell is edited"
-    }
+    },
+    onDelete: {
+      type: "eventHandler",
+      description: "Function called when the delete action is triggered",
+      argTypes: [{ name: "id", type: "object" }],
+    },
+    onPrint: {
+      type: "eventHandler",
+      description: "Function called when the print action is triggered",
+      argTypes: [{ name: "id", type: "object" }],
+    },
   },
   states: {
     selectedRow: {
