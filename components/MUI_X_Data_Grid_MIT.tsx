@@ -75,11 +75,11 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     });
   };
 
-  const [icons, setIcons] = React.useState<Record<string, React.ComponentType>>({});
+  const [icons, setIcons] = React.useState<Record<string, React.ComponentType | null>>({});
 
   React.useEffect(() => {
     const loadIcons = async () => {
-      const iconPromises = actions.map(async action => {
+      const iconPromises = actions.length ? actions.map(async action => {
         try {
           const icon = await import(`@mui/icons-material/${action.iconType}`);
           return { icon: icon.default, iconType: action.iconType };
@@ -87,9 +87,10 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
           console.error(`Error loading icon ${action.iconType}:`, error);
           return { icon: ErrorIcon, iconType: action.iconType }; // Fallback to ErrorIcon in case of failure
         }
-      });
+      }) : [{ icon: ErrorIcon, iconType: 'error' }]; // Default action
+
       const loadedIcons = await Promise.all(iconPromises);
-      const newIcons = loadedIcons.reduce<Record<string, React.ComponentType>>((acc, { iconType, icon }) => {
+      const newIcons = loadedIcons.reduce<Record<string, React.ComponentType | null>>((acc, { iconType, icon }) => {
         acc[iconType] = icon;
         return acc;
       }, {});
