@@ -38,9 +38,14 @@ const iconMapping = {
 };
 
 interface ActionConfig {
-  iconType: keyof typeof iconMapping;
+  iconType: string;
   actionEventName: string;
 }
+
+const defaultAction: ActionConfig[] = [{
+  iconType: 'Error', // Ensure this corresponds to an actual icon file like ErrorIcon
+  actionEventName: 'defaultAction'
+}];
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rows,
@@ -62,7 +67,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onRowClick,
   onCellClick,
   processRowUpdate,
-  actions,
+  actions = defaultAction,
   onAction,
   eventHandlers,
   onDelete,
@@ -76,7 +81,29 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   };
 
   
+  const [icons, setIcons] = React.useState<Record<string, React.ComponentType>>({});
 
+  React.useEffect(() => {
+    const loadIcons = async () => {
+      const iconPromises = actions.map(async action => {
+        try {
+          const icon = await import(`@mui/icons-material/${action.iconType}`);
+          return { icon: icon.default, iconType: action.iconType };
+        } catch (error) {
+          console.error(`Error loading icon ${action.iconType}:`, error);
+          return { icon: ErrorIcon, iconType: action.iconType }; // Fallback to ErrorIcon in case of failure
+        }
+      });
+      const loadedIcons = await Promise.all(iconPromises);
+      const newIcons = loadedIcons.reduce<Record<string, React.ComponentType>>((acc, { iconType, icon }) => {
+        acc[iconType] = icon;
+        return acc;
+      }, {});
+      setIcons(newIcons);
+    };
+
+    loadIcons();
+  }, [actions]);
   
 
   const augmentedColumns = [
@@ -87,7 +114,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       getActions: (params: GridRowParams) => actions.map(action => (
         <GridActionsCellItem
           key={`${params.id}-${action.iconType}`}
-          icon={iconMapping[action.iconType]}
+          icon={React.createElement(icons[action.iconType] || ErrorIcon)}
           onClick={() => onAction(action.actionEventName, params.row)}
           label={action.iconType}
         />
