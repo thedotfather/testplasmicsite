@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, GridToolbarContainer, GridToolbarExport, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector, GridToolbarQuickFilter, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PrintIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -30,7 +30,7 @@ interface DataGridDemoProps {
 
 const iconMapping = {
   Delete: <DeleteIcon />,
-  Print: <PrintIcon />,
+  Edit: <EditIcon />,
 };
 
 interface ActionConfig {
