@@ -123,8 +123,8 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       type: "object",
       description: "Actions configuration with icon types and event names",
       defaultValue: [
-        { iconType: 'Delete', actionEventName: 'onDelete' },
-        { iconType: 'Print', actionEventName: 'onPrint' }
+        { iconType: 'delete', actionEventName: 'onDelete' },
+        { iconType: 'print', actionEventName: 'onPrint' }
       ]
     },
     onAction: {
