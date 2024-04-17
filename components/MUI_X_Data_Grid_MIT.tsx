@@ -76,8 +76,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       getActions: (params: GridRowParams) => rowActions.map(action => (
         <GridActionsCellItem
           key={`${params.id}-${action.icon}`}
-          icon={iconMapping[action.icon
-          ]}
+          icon={iconMapping[action.icon]}
           onClick={() => onRowAction(action.action, params.row)}
           label={action.icon}
         />
