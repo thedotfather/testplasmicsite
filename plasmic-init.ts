@@ -119,15 +119,17 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
       ],
       description: "Function called when a cell is edited"
     },
-    onDelete: {
-      type: "eventHandler",
-      description: "Function called when the delete action is triggered",
-      argTypes: [{ name: "id", type: "object" }],
+    actions: {
+      type: "object",
+      description: "Actions configuration with icon types and event names",
+      defaultValue: [
+        { iconType: 'delete', actionEventName: 'onDelete' },
+        { iconType: 'print', actionEventName: 'onPrint' }
+      ]
     },
-    onPrint: {
-      type: "eventHandler",
-      description: "Function called when the print action is triggered",
-      argTypes: [{ name: "id", type: "object" }],
+    eventHandlers: {
+      type: "object",
+      description: "Object mapping event names to functions",
     },
   },
   states: {

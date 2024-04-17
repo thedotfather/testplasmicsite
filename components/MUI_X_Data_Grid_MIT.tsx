@@ -7,6 +7,8 @@ import PrintIcon from '@mui/icons-material/Print';
 interface DataGridDemoProps {
   rows: GridRowsProp;
   columns: GridColDef[];
+  actions: ActionConfig[];
+  eventHandlers: Record<string, (id: any) => void>;
   pageSizeOptions: Array<number | { label: string, value: number }>;
   cellTextColor?: string; // Custom prop for cell text color
   headerTextColor?: string; // Custom prop for header text color
@@ -26,6 +28,16 @@ interface DataGridDemoProps {
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
+}
+
+const iconMapping = {
+  delete: <DeleteIcon />,
+  print: <PrintIcon />,
+};
+
+interface ActionConfig {
+  iconType: keyof typeof iconMapping;
+  actionEventName: string;
 }
 
 const DataGridDemo: React.FC<DataGridDemoProps> = ({
@@ -48,6 +60,8 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onRowClick,
   onCellClick,
   processRowUpdate,
+  actions,
+  eventHandlers,
   onDelete,
   onPrint
 }) => {
@@ -62,10 +76,14 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     {
       field: 'actions',
       type: 'actions',
-      getActions: (params: GridRowParams) => [
-        <GridActionsCellItem  key={`${params.id}-delete`} icon={<DeleteIcon />} onClick={() => onDelete(params.id)} label="Delete" />,
-        <GridActionsCellItem key={`${params.id}-print`} icon={<PrintIcon />} onClick={() => onPrint(params.id)} label="Print" showInMenu />,
-      ],
+      getActions: (params: GridRowParams) => actions.map(action => (
+        <GridActionsCellItem
+          key={`${params.id}-${action.iconType}`}
+          icon={iconMapping[action.iconType]}
+          onClick={() => eventHandlers[action.actionEventName]?.(params.id)}
+          label={action.iconType}
+        />
+      )),
     },
   ];
   const dataGridProps: any = {
