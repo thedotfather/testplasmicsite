@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, GridToolbarContainer, GridToolbarExport, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector, GridToolbarQuickFilter, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PrintIcon from '@mui/icons-material/Print';
+import ErrorIcon from '@mui/icons-material/Error'; // Fallback icon
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -73,6 +74,29 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       resolve(newRow);
     });
   };
+
+  const [icons, setIcons] = React.useState<Record<string, React.ComponentType>>({});
+
+  React.useEffect(() => {
+    const loadIcons = async () => {
+      const iconPromises = actions.map(action =>
+        import(`@mui/icons-material/${action.iconType}`)
+          .then(module => ({ icon: module.default, iconType: action.iconType }))
+          .catch(() => ({ icon: ErrorIcon, iconType: action.iconType })) // Use ErrorIcon as fallback
+      );
+
+      const loadedIcons = await Promise.all(iconPromises);
+      const iconMap = loadedIcons.reduce<Record<string, React.ComponentType>>((acc, { iconType, icon }) => {
+        acc[iconType] = icon;
+        return acc;
+      }, {});
+
+      setIcons(iconMap);
+    };
+
+    loadIcons();
+  }, [actions]);
+
   const augmentedColumns = [
     ...columns,
     {
@@ -81,7 +105,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
       getActions: (params: GridRowParams) => actions.map(action => (
         <GridActionsCellItem
           key={`${params.id}-${action.iconType}`}
-          icon={iconMapping[action.iconType]}
+          icon={React.createElement(icons[action.iconType])}
           onClick={() => onAction(action.actionEventName, params.row)}
           label={action.iconType}
         />
