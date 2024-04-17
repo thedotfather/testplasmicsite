@@ -127,10 +127,14 @@ PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
         { iconType: 'print', actionEventName: 'onPrint' }
       ]
     },
-    eventHandlers: {
-      type: "object",
-      description: "Object mapping event names to functions",
-    },
+    onAction: {
+      type: "eventHandler",
+      description: "Handler for action clicks",
+      argTypes: [
+        { name: "actionType", type: "string" }, 
+        { name: "row", type: "object" }
+      ]
+    }
   },
   states: {
     selectedRow: {

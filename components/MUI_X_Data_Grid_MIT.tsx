@@ -28,6 +28,7 @@ interface DataGridDemoProps {
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
+  onAction: (actionType: string, row: any) => void;
 }
 
 const iconMapping = {
@@ -61,6 +62,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onCellClick,
   processRowUpdate,
   actions,
+  onAction,
   eventHandlers,
   onDelete,
   onPrint
@@ -80,7 +82,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
         <GridActionsCellItem
           key={`${params.id}-${action.iconType}`}
           icon={iconMapping[action.iconType]}
-          onClick={() => eventHandlers[action.actionEventName]?.(params.id)}
+          onClick={() => onAction(action.actionEventName, params.row)}
           label={action.iconType}
         />
       )),
@@ -95,6 +97,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     onRowClick,
     onCellClick,
     processRowUpdate: (newRow: any, oldRow: any) => handleProcessRowUpdate(newRow, oldRow),
+    onAction
   };
 
   return (
