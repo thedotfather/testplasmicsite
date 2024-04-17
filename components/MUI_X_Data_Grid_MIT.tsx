@@ -2,8 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp, GridRowParams, GridCellParams, GridToolbarContainer, GridToolbarExport, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector, GridToolbarQuickFilter, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PrintIcon from '@mui/icons-material/Print';
-import ErrorIcon from '@mui/icons-material/Error'; // Fallback icon
+import PrintIcon from '@mui/icons-material/Edit';
 
 interface DataGridDemoProps {
   rows: GridRowsProp;
@@ -23,8 +22,6 @@ interface DataGridDemoProps {
   exportButton: boolean;
   searchBar: boolean;
   hideFooterPagination: boolean;
-  onDelete: (id: number | string) => void;  // Prop to handle delete action
-  onPrint: (id: number | string) => void;   // Prop to handle print action
   onRowClick: (params: GridRowParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for row click events
   onCellClick: (params: GridCellParams, event: React.MouseEvent<HTMLElement>) => void; // Handler for cell click events
   processRowUpdate: (newRow: any, oldRow: any) => any;
