@@ -94,7 +94,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     },
   ];
   const dataGridProps: any = {
-    rows,
+    currentRows,
     columns: augmentedColumns,
     pageSizeOptions,  
     checkboxSelection,
