@@ -66,7 +66,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
     return new Promise((resolve, reject) => {
-      resolve(oldRow);
+      resolve(newRow);
     });
   };
 
