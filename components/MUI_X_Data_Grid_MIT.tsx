@@ -62,29 +62,13 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   onRowAction
 }) => {
 
-  const [currentRows, setCurrentRows] = React.useState<GridRowsProp>(rows);
-
-  // Update local state when external rows prop changes
-  React.useEffect(() => {
-    setCurrentRows(rows);
-  }, [rows]);
 
   const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
-    // Assuming processRowUpdate updates the backend and you have a mechanism to fetch those updates
-    processRowUpdate(newRow, oldRow);  // Try updating the backend
-    const updatedRows = currentRows.map(row => row.id === newRow.id ? { ...row, ...newRow } : row);
-    setCurrentRows(updatedRows);  // Update local state to reflect change immediately
-    return new Promise((resolve, reject) => {
-      resolve(newRow);
-    });
-  };
-
-  /* const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     processRowUpdate(newRow, oldRow);
     return new Promise((resolve, reject) => {
-      resolve(newRow);
+      resolve(oldRow);
     });
-  }; */
+  };
 
   const augmentedColumns = [
     ...columns,
@@ -102,7 +86,7 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     },
   ];
   const dataGridProps: any = {
-    rows: currentRows,
+    rows,
     columns: augmentedColumns,
     pageSizeOptions,  
     checkboxSelection,
