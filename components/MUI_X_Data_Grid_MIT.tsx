@@ -69,17 +69,22 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     setCurrentRows(rows);
   }, [rows]);
 
-  const handleProcessRowUpdate = async (newRow: any, oldRow: any) => {
+  const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
     // Assuming processRowUpdate updates the backend and you have a mechanism to fetch those updates
-    try {
-      await processRowUpdate(newRow, oldRow);  // Try updating the backend
-      const updatedRows = currentRows.map(row => row.id === newRow.id ? { ...row, ...newRow } : row);
-      setCurrentRows(updatedRows);  // Update local state to reflect change immediately
-    } catch (error) {
-      console.error("Error updating row:", error);
-      // Optionally handle errors or revert to old row data if necessary
-    }
+    processRowUpdate(newRow, oldRow);  // Try updating the backend
+    const updatedRows = currentRows.map(row => row.id === newRow.id ? { ...row, ...newRow } : row);
+    setCurrentRows(updatedRows);  // Update local state to reflect change immediately
+    return new Promise((resolve, reject) => {
+      resolve(newRow);
+    });
   };
+
+  /* const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
+    processRowUpdate(newRow, oldRow);
+    return new Promise((resolve, reject) => {
+      resolve(newRow);
+    });
+  }; */
 
   const augmentedColumns = [
     ...columns,
