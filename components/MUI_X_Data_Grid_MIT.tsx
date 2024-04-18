@@ -61,12 +61,22 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
   rowActions,
   onRowAction
 }) => {
-  const handleProcessRowUpdate = (newRow: any, oldRow: any) => {
-    processRowUpdate(newRow, oldRow);
-    return new Promise((resolve, reject) => {
-      resolve(newRow);
-    });
-  };
+
+  const [currentRows, setRows] = React.useState(rows);
+
+  const handleProcessRowUpdate = async (newRow: any, oldRow: any) => {
+    // If processRowUpdate returns a result or modifies the newRow, make sure to handle it appropriately.
+    await processRowUpdate(newRow, oldRow);
+
+    const updatedRows = rows.map(row => 
+        row.id === newRow.id ? {...row, ...newRow} : row
+    );
+
+    // Assuming you have a state setter for rows
+    setRows(updatedRows);  // You need to define this state management in your component
+
+    return newRow;
+};
 
   const augmentedColumns = [
     ...columns,
