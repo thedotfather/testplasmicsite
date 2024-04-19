@@ -70,9 +70,9 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
     });
   };
 
-  const augmentedColumns = [
-    ...columns,
-    {
+  const augmentedColumns = [...columns];
+  if (rowActions.length > 0) {
+    augmentedColumns.push({
       field: 'actions',
       type: 'actions',
       getActions: (params: GridRowParams) => rowActions.map(action => (
@@ -83,8 +83,9 @@ const DataGridDemo: React.FC<DataGridDemoProps> = ({
           label={action.icon}
         />
       )),
-    },
-  ];
+    });
+  }
+  
   const dataGridProps: any = {
     rows,
     columns: augmentedColumns,
