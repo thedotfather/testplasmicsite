@@ -12,7 +12,7 @@ export const PLASMIC = initPlasmicLoader({
 });
 
 PLASMIC.registerComponent(MUI_X_Data_Grid_MIT, {
-  name: "DataGridDemo",
+  name: "MUI X DataGrid",
   props: {
     // Example 'rows' data structure
     rows: {
